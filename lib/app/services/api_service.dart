@@ -10,6 +10,17 @@ class APIService {
       api.tokenUri().toString(),
       headers: {'Authorization': 'Basic ${api.apiKey}'},
     );
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final accessToken = data['access_token'];
+      if (accessToken != null) {
+        return accessToken;
+      }
+    }
+    print(
+      'Request ${api.tokenUri()} failed\nResponse: ${response.statusCode} ${response.reasonPhrase}'
+    );
+    throw response;
   }
   
 }
