@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
+
   final String title;
 
   @override
@@ -32,7 +33,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String _accessToken = '';
 
-  void _updateAcessToken() async{
+  void _updateAccessToken() async{
     final apiService = APIService(API.sandbox());
     final accessToken = await apiService.getAccessToken();
     setState(() => _accessToken = accessToken);
@@ -59,10 +60,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _updateAcessToken,
+        onPressed: _updateAccessToken,
         tooltip: 'Increment',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
