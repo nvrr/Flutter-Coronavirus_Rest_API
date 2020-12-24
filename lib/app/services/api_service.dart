@@ -52,10 +52,10 @@ class APIService {
 
   static Map<Endpoint, String> _responseJsonKeys = {
     Endpoint.cases: 'cases',
-    Endpoint.casesSuspected: 'casesSuspected',
-    Endpoint.casesConfirmed: 'casesConfirmed',
-    Endpoint.deaths: 'deaths',
-    Endpoint.recovered: 'recovered',
+    Endpoint.casesSuspected: 'data',
+    Endpoint.casesConfirmed: 'data',
+    Endpoint.deaths: 'data',
+    Endpoint.recovered: 'data',
   };
   
 }
