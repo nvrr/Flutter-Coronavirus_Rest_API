@@ -4,38 +4,43 @@ import 'package:coronavirus_rest_api/app/ui/endpoint_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class DashBoard extends StatefulWidget {
+class Dashboard extends StatefulWidget {
   @override
-  _DashBoardState createState() => _DashBoardState();
+  _DashboardState createState() => _DashboardState();
 }
 
-class _DashBoardState extends State<DashBoard> {
+class _DashboardState extends State<Dashboard> {
   int _cases;
+
   @override
   void initState() {
     super.initState();
     _updateData();
   }
 
-  Future<void> _updateData() async{
+  Future<void> _updateData() async {
     final dataRepository = Provider.of<DataRepository>(context, listen: false);
     final cases = await dataRepository.getEndpointData(Endpoint.cases);
     setState(() => _cases = cases);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Coronavirus Tracker'),
       ),
-      body: ListView(
-        children: <Widget>[
-          EndpointCard(
-            endpoint: Endpoint.cases,
-            value: _cases,
-          ),
-        ],
-      )
+      body: RefreshIndicator(
+        onRefresh: _updateData,
+        child: ListView(
+          children: <Widget>[
+            EndpointCard(
+              endpoint: Endpoint.cases,
+              value: _cases,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
