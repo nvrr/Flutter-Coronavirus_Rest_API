@@ -19,11 +19,11 @@ class EndpointCard extends StatelessWidget {
             children: <Widget>[
               Text(
                 'Cases',
-                style: Theme.of(context).textTheme.headline1,
+                style: Theme.of(context).textTheme.headline5,
               ),
               Text(
                 value != null ? value.toString() : '',
-                style: Theme.of(context).textTheme.headline1,
+                style: Theme.of(context).textTheme.headline5,
               ),
             ]
           ),

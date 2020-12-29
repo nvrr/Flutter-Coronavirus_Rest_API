@@ -1,6 +1,8 @@
+import 'package:coronavirus_rest_api/app/repositories/data_repository.dart';
 import 'package:coronavirus_rest_api/app/services/api.dart';
 import 'package:coronavirus_rest_api/app/ui/endpoint_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DashBoard extends StatefulWidget {
   @override
@@ -8,6 +10,18 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
+  int _cases;
+  @override
+  void initState() {
+    super.initState();
+    _updateData();
+  }
+
+  Future<void> _updateData() async{
+    final dataRepository = Provider.of<DataRepository>(context, listen: false);
+    final cases = await dataRepository.getEndpointData(Endpoint.cases);
+    setState(() => _cases = cases);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +32,7 @@ class _DashBoardState extends State<DashBoard> {
         children: <Widget>[
           EndpointCard(
             endpoint: Endpoint.cases,
-            value: 123,
+            value: _cases,
           ),
         ],
       )
