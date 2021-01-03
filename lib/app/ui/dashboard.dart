@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:coronavirus_rest_api/app/repositories/data_repository.dart';
 import 'package:coronavirus_rest_api/app/repositories/endpoints_data.dart';
 import 'package:coronavirus_rest_api/app/services/api.dart';
@@ -22,9 +24,13 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future<void> _updateData() async {
+    try {
     final dataRepository = Provider.of<DataRepository>(context, listen: false);
     final endpointsData = await dataRepository.getAllEndpointsData();
     setState(() => _endpointsData = endpointsData);
+    } on SocketException catch (e) {
+      print(e);
+    }
   }
 
   @override
