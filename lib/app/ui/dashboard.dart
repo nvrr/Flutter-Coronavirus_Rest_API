@@ -37,6 +37,13 @@ class _DashboardState extends State<Dashboard> {
         content: 'Could not retrieve data, Please try again later.',
         defaultActionText: 'OK',
       );
+    } catch (_) { // u can test this may making exception like throw{}; in data_repository.dart in repositories folder at _getDataRefreshingToken<T>({});
+      showAlertDialog(
+        context: context,
+        title: 'Unknown Error',
+        content: 'Please contact support or try again later.',
+        defaultActionText: 'OK',
+      );
     }
   }
 
