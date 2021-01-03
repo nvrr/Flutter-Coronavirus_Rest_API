@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/semantics.dart';
 
 class EndpointData {
   final int value;
